@@ -1,0 +1,75 @@
+---
+title: "sentimentTextAnalyzer2 Demo"
+author: "Kathryn Burkhart"
+date: "2024-04-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## A Quick Introduction
+
+Welcome to sentimentTextAnalyzer2! This is a quick start document to give you a basic overview of the functions found within the package. There are four major functions of this package: easyRead, easyClean, easyFrequency, and easyWordCloud. These functions are here to help you on a variety of different texts you desire to conduct sentiment analysis with. To get started, make sure you have already installed the package onto your computer and call it out via library to begin.
+
+```{r}
+library(sentimentTextAnalyzer2)
+```
+
+## easyRead Function
+
+Reads in the file the user selected and preprocesses it to determine what type of file or URL it is. The function will prepare the text to then be cleaned through easyClean which is called within easyRead. You will not see any particular call out of easyClean in this document. This is because the function is discretely executed when you run easyRead. After running easyRead, you will have a matrix of words so that you will then continue on to easyFrequency.
+
+As an example, we will use a URL of Susan B Anthony's speech:
+
+```{r}
+cleanText <- easyRead("http://www.historyplace.com/speeches/anthony.htm")
+# This produces a ready-to-use matrix, so that one can begin analysis immediately
+```
+## easyFrequency Function
+
+This function gets the total frequency of words overall but also determines the frequency of positive and negative words found within the text. To assure that words are defined as positive and negative, we will be using the Bing Lexicon that is made up of two txt files (positive-words.txt and negative-words.txt). These files are available to download from the "raw-data" folder in the sentimentTextAnalyzer2 repository on Github. I highly recommend that you have loaded these files into your current R directory as it is needed for the easyFrequency function to work properly.
+
+```{r}
+# Input Bing Lexicons - download from raw-data folder from Github
+pos <- scan("C:/Users/ktbur/Documents/USF/Spring2024_ClassFolders/LIS4370_R_Programming/positive-words.txt", character(0), sep = "\n")
+neg <- scan("C:/Users/ktbur/Documents/USF/Spring2024_ClassFolders/LIS4370_R_Programming/negative-words.txt", character(0), sep = "\n")
+
+freqSBA <- easyFrequency(cleanText, pos, neg)
+
+# View output of easyFrequency
+freqSBA
+```
+
+## easyFrequency Function Output Discussion
+
+Upon executing easyFrequency and reviewing what is stored in freqSBA, the function will output the following seven things:
+
+**word_freq**: Shows every single word used in the text and how often it occurs via count. So, in Susan B Anthony's speech, she used the word, states, five times.
+
+**n_pos**: Provides the overall count of positive words found within the text. There are 24 positive words found as it does a look up against the Bing positive word lexicon.
+
+**n_neg**: Similar to n_pos, it shows the number of negative words found within the text. In this case, there are 16 negative words.
+
+**pos_words**: This prints out the 24 positive words found.
+
+**pos_counts**: For each of the positive words found, it will show the overall frequency how often these words appeared within the text. As you can see from the output, liberty showed up 4 times in the speech.
+
+**neg_words**: This prints out all 16 negative words found.
+
+**neg_counts**: For each of the negative words found, it will show the overall frequency how often these words appeared within the text. As you can see from the output, crime and hateful both showed up 2 times in the speech.
+
+## easyWordCloud Function
+
+Now that the frequencies have been determined by the previous function, it is time to visualize the findings. Relying on the wordcloud2 package, all users need to do is enter the current iteration of their text data after it has been run through the easyFrequency function. This function does require that user have entered their selected findings into a dataframe before hand and if they want to, they can specify what color they would like word cloud to be visualized in. At this time, it will randomly generate a palette of different colors if color_scheme is anything but green or red. However, if the user desires, they can set color to either green or red for a distinctive all green or all red word cloud.
+
+```{r}
+# Step 1: place easyFrequency findings into a dataframe
+
+# Positive words
+positive.df <- data.frame(word = freqSBA$pos_words, freq = freqSBA$pos_counts, sentiment = "positive")
+
+easyWordCloud(positive.df, color_scheme =  "coral")
+```
+
