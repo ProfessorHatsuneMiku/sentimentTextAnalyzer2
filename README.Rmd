@@ -1,0 +1,21 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# sentimentTextAnalyzer2
+
+
+The goal of sentimentTextAnalyzer2 is to provide positive and negative sentiment insights of user-inputted files and URL links. Then, it can generate word clouds of its findings.
+
+
