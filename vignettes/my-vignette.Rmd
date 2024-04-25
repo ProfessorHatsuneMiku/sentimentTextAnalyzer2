@@ -1,0 +1,42 @@
+---
+title: "sentimentTextAnalyzer2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Overview
+
+## What is sentimentTextAnalyzer?
+
+**sentimentTextAnalyzer** is an R package designed to analyze text data for positive and negative sentiment. It offers functions to parse text from various sources such as URLs and flat text files and extracts sentiment insights.
+
+## What can I use sentimentTextAnalyzer for?
+
+You can use **sentimentTextAnalyzer** to analyze text data from diverse sources, including customer feedback, social media posts, and speeches. It helps identify positive and negative sentiment signals and generates word clouds highlighting frequently occurring words.
+
+## How does sentimentTextAnalyzer work?
+
+**sentimentTextAnalyzer** utilizes natural language processing (NLP) techniques to preprocess the text data. It then identifies positive and negative sentiment words and calculates their frequency in the text. Additionally, the package can generate word clouds to visualize common words in the text data.
+
+## Can I customize my word cloud?
+
+Yes, user can specify in the easyWordCloud command which color they would like to see their word cloud in.
+
+## How can I access sentimentTextAnalyzer?
+
+**sentimentTextAnalyzer** is available for download from GitHub. You can install it directly from the GitHub repository.
+
+## Is sentimentTextAnalyzer free to use?
+
+Yes, **sentimentTextAnalyzer** is an open-source project released under a permissive license. You can use it for free in your projects, whether for personal, academic, or commercial purposes.
+
